@@ -2,10 +2,8 @@
 
 [![GoDoc](https://godoc.org/github.com/JubaerHossain/validation?status.svg)](https://godoc.org/github.com/JubaerHossain/validation)
 [![Go Report Card](https://goreportcard.com/badge/github.com/JubaerHossain/validation)](https://goreportcard.com/report/github.com/JubaerHossain/validation)
-[![Build Status](https://travis-ci.org/JubaerHossain/validation.svg?branch=master)](https://travis-ci.org/JubaerHossain/validation)
 [![codecov](https://codecov.io/gh/JubaerHossain/validation/branch/master/graph/badge.svg)](https://codecov.io/gh/JubaerHossain/validation)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Release](https://img.shields.io/github/release/JubaerHossain/validation.svg?style=flat-square)](https://github.com/JubaerHossain/validation/releases/latest)
 
 
 This is a simple Go package for validating structs based on a set of validation rules. It can be used to ensure that incoming data from clients, databases or other sources meets certain criteria before being processed further.
