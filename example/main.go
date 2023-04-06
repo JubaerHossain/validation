@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/JubaerHossain/validator"
+	"github.com/JubaerHossain/validation"
 )
 
 type User struct {
@@ -27,29 +27,29 @@ func main() {
 	}
 }
 
-func ValidateUser(user User) []validator.ValidationErrorItem {
+func ValidateUser(user User) []validation.ValidationErrorItem {
 
-	rules := []validator.ValidationRule{
+	rules := []validation.ValidationRule{
 		{
 			Field:       "name",
 			Description: "Name",
-			Validations: []func(interface{}) validator.ValidationErrorItem{
-				validator.RequiredValidation,
-				validator.MinLengthValidation(3),
-				validator.MaxLengthValidation(50),
+			Validations: []func(interface{}) validation.ValidationErrorItem{
+				validation.RequiredValidation,
+				validation.MinLengthValidation(3),
+				validation.MaxLengthValidation(50),
 			},
 		},
 		{
 			Field:       "password",
 			Description: "Password",
-			Validations: []func(interface{}) validator.ValidationErrorItem{
-				validator.RequiredValidation,
-				validator.MinLengthValidation(6),
-				validator.MaxLengthValidation(50),
+			Validations: []func(interface{}) validation.ValidationErrorItem{
+				validation.RequiredValidation,
+				validation.MinLengthValidation(6),
+				validation.MaxLengthValidation(50),
 			},
 		},
 	}
 
-	return validator.Validate(user, rules)
+	return validation.Validate(user, rules)
 
 }
