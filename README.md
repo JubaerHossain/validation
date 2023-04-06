@@ -1,9 +1,9 @@
 # Validation Package
 
-[![GoDoc](https://godoc.org/github.com/JubaerHossain/go-validation/validation?status.svg)](https://godoc.org/github.com/JubaerHossain/go-validation/validation)
-[![Go Report Card](https://goreportcard.com/badge/github.com/JubaerHossain/go-validation)](https://goreportcard.com/report/github.com/JubaerHossain/go-validation)
-[![Build Status](https://travis-ci.org/JubaerHossain/go-validation.svg?branch=master)](https://travis-ci.org/JubaerHossain/go-validation)
-[![codecov](https://codecov.io/gh/JubaerHossain/go-validation/branch/master/graph/badge.svg)](https://codecov.io/gh/JubaerHossain/go-validation)
+[![GoDoc](https://godoc.org/github.com/JubaerHossain/validation?status.svg)](https://godoc.org/github.com/JubaerHossain/validation)
+[![Go Report Card](https://goreportcard.com/badge/github.com/JubaerHossain/validation)](https://goreportcard.com/report/github.com/JubaerHossain/validation)
+[![Build Status](https://travis-ci.org/JubaerHossain/validation.svg?branch=master)](https://travis-ci.org/JubaerHossain/validation)
+[![codecov](https://codecov.io/gh/JubaerHossain/branch/master/graph/badge.svg)](https://codecov.io/gh/JubaerHossain/validation)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This is a simple Go package for validating structs based on a set of validation rules. It can be used to ensure that incoming data from clients, databases or other sources meets certain criteria before being processed further.
