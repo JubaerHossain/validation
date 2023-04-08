@@ -78,7 +78,7 @@ func getFieldByJsonTag(data interface{}, field string) interface{} {
 }
 
 func RequiredValidation(value interface{}) ValidationErrorItem {
-	if value == nil {
+	if value == nil || value == "" {
 		return ValidationErrorItem{
 			Message: "Field is required",
 		}
@@ -104,7 +104,7 @@ func RequiredValidation(value interface{}) ValidationErrorItem {
 
 func MinLengthValidation(minLength int) func(interface{}) ValidationErrorItem {
 	return func(value interface{}) ValidationErrorItem {
-		if value == nil {
+		if value == nil || value == "" {
 			return ValidationErrorItem{}
 		}
 
@@ -129,7 +129,7 @@ func MinLengthValidation(minLength int) func(interface{}) ValidationErrorItem {
 
 func MaxLengthValidation(maxLength int) func(interface{}) ValidationErrorItem {
 	return func(value interface{}) ValidationErrorItem {
-		if value == nil {
+		if value == nil || value == "" {
 			return ValidationErrorItem{}
 		}
 
@@ -153,7 +153,7 @@ func MaxLengthValidation(maxLength int) func(interface{}) ValidationErrorItem {
 }
 
 func EmailValidation(value interface{}) ValidationErrorItem {
-	if value == nil {
+	if value == nil || value == "" {
 		return ValidationErrorItem{}
 	}
 
@@ -173,10 +173,9 @@ func EmailValidation(value interface{}) ValidationErrorItem {
 }
 
 func PhoneValidation(value interface{}) ValidationErrorItem {
-	if value == nil {
+	if value == nil || value == "" {
 		return ValidationErrorItem{}
 	}
-
 	phoneRegex := regexp.MustCompile(`^\+[1-9]\d{1,14}$`)
 	if !phoneRegex.MatchString(value.(string)) {
 		return ValidationErrorItem{
@@ -188,7 +187,7 @@ func PhoneValidation(value interface{}) ValidationErrorItem {
 }
 
 func URLValidation(value interface{}) ValidationErrorItem {
-	if value == nil {
+	if value == nil || value == "" {
 		return ValidationErrorItem{}
 	}
 
@@ -217,35 +216,25 @@ func URLValidation(value interface{}) ValidationErrorItem {
 	return ValidationErrorItem{}
 }
 
-func StringValidation(pattern string, errorMessage string) func(interface{}) ValidationErrorItem {
-	return func(value interface{}) ValidationErrorItem {
-		if value == nil {
-			return ValidationErrorItem{}
-		}
-
-		strValue, ok := value.(string)
-		if !ok {
-			return ValidationErrorItem{
-				Message: "Value is not a string",
-			}
-		}
-
-		if matched, err := regexp.MatchString(pattern, strValue); err != nil {
-			return ValidationErrorItem{
-				Message: err.Error(),
-			}
-		} else if !matched {
-			return ValidationErrorItem{
-				Message: errorMessage,
-			}
-		}
-
+func StringValidation(value interface{}) ValidationErrorItem {
+	if value == nil || value == "" {
 		return ValidationErrorItem{}
 	}
+
+	switch reflect.TypeOf(value).Kind() {
+	case reflect.String:
+		// do nothing, value is already a string
+	default:
+		return ValidationErrorItem{
+			Message: "Field must be a string",
+		}
+	}
+
+	return ValidationErrorItem{}
 }
 
 func NumericValidation(value interface{}) ValidationErrorItem {
-	if value == nil {
+	if value == nil || value == "" {
 		return ValidationErrorItem{}
 	}
 
@@ -271,6 +260,11 @@ func NumericValidation(value interface{}) ValidationErrorItem {
 }
 
 func DateValidation(value interface{}) ValidationErrorItem {
+
+	if value == nil || value == "" {
+		return ValidationErrorItem{}
+	}
+
 	dateStr, ok := value.(string)
 	if !ok {
 		return ValidationErrorItem{
@@ -318,6 +312,11 @@ func DateValidation(value interface{}) ValidationErrorItem {
 }
 
 func ImageValidation(value interface{}) ValidationErrorItem {
+
+	if value == nil || value == "" {
+		return ValidationErrorItem{}
+	}
+
 	file, ok := value.(*multipart.FileHeader)
 	if !ok {
 		return ValidationErrorItem{
@@ -337,6 +336,11 @@ func ImageValidation(value interface{}) ValidationErrorItem {
 
 func FileSizeValidation(maxSize int64) func(interface{}) ValidationErrorItem {
 	return func(value interface{}) ValidationErrorItem {
+
+		if value == nil || value == "" {
+			return ValidationErrorItem{}
+		}
+
 		file, ok := value.(*multipart.FileHeader)
 		if !ok {
 			return ValidationErrorItem{
@@ -362,6 +366,11 @@ func contains(s []string, e string) bool {
 	return false
 }
 func ImageMimeValidation(value interface{}) ValidationErrorItem {
+
+	if value == nil || value == "" {
+		return ValidationErrorItem{}
+	}
+
 	file, ok := value.(*multipart.FileHeader)
 	if !ok {
 		return ValidationErrorItem{
@@ -382,6 +391,11 @@ func ImageMimeValidation(value interface{}) ValidationErrorItem {
 }
 
 func FileValidation(value interface{}) ValidationErrorItem {
+
+	if value == nil || value == "" {
+		return ValidationErrorItem{}
+	}
+	
 	_, ok := value.(*multipart.FileHeader)
 	if !ok {
 		return ValidationErrorItem{
@@ -393,6 +407,11 @@ func FileValidation(value interface{}) ValidationErrorItem {
 }
 
 func FileTypeValidation(value interface{}, validTypes []string) ValidationErrorItem {
+
+	if value == nil || value == "" {
+		return ValidationErrorItem{}
+	}
+
 	file, ok := value.(*multipart.FileHeader)
 	if !ok {
 		return ValidationErrorItem{
